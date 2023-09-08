@@ -6,7 +6,8 @@ My Bash and VIM configuration
 Testet on
 
 * Debian 11 (_Bullseye_)
-* Debian 10 (_Buster_)
+* Debian 10 (_Buster_) (wrong symbol for "end of line")
+* Debian 9 (_Stretch_) (_universal-ctags_ do not exist here; use _exuberant-ctags_; error in NERDTree-Git; wrong symbol for "end of line")
 
 so far.
 
