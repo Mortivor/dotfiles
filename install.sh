@@ -10,4 +10,5 @@ for FILE in "${FILES[@]}"; do
 	ln -s "$HOME/dotfiles/$FILE" "$HOME/$FILE"
 done
 
+git submodule init && git submodule update
 vim +PluginInstall +qall
