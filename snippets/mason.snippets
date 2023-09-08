@@ -1,0 +1,35 @@
+snippet init
+	<%init>
+		$0
+	</%init>
+
+snippet once
+	<%filter>
+		$0
+	</%once>
+
+snippet filter
+	<%filter>
+		$0
+	</%filter>
+
+snippet flags
+	<%flags>
+		\$${1:flag} => ${2:value}
+	</%flags>
+	$0
+
+snippet args
+	<%args>
+		\$${1:variable} => ${2:default_value}
+	</%args>
+	$0
+
+snippet method
+	<%method ${1:name}>
+	$0
+	<%init>
+	</%init>
+	<%args>
+	</%args>
+	</%method>

@@ -1,0 +1,87 @@
+snippet #!
+	#!/usr/bin/perl
+
+	use strict;
+	use warnings;
+	use utf8;
+	use open qw/:std :utf8/;
+
+	${0}
+
+snippet package
+	=encoding utf-8
+
+	=head1 NAME
+
+	$1
+
+	=head1 USAGE
+
+		my $obj = $1->new()
+
+	=head1 DESCRIPTION
+
+	=cut
+
+	package ${1:name};
+
+	use strict;
+	use warnings;
+	use utf8;
+	use open qw/:std :utf8/;
+
+	=head1 METHODS
+
+	=head2 C<new()>
+
+	The constructor of $1.
+
+	=cut
+
+	sub new {
+		my \$class = shift;
+		my %par = (
+			@_
+		);
+		my \$self = {
+			_orig_par => \%par
+		};
+		bless(\$self, \$class);
+		return \$self;
+	}
+
+	${0}
+
+	=head1 AUTHOR
+
+	`trim(system("git config user.name")).' - L<'.trim(system("git config user.email")).'>'`
+
+	=cut
+
+	1;
+
+snippet sub
+	sub ${1:name} {
+		my \$self = shift;
+		my %par = (
+			@_
+		);
+		${0}
+	}
+
+snippet eval
+	local \$@;
+	eval {
+		${1:# do someting risky}
+	};
+	if (my \$error = \$@) {
+		${0:# handle failure}
+	}
+
+snippet slurp
+	my \$${1:var} = do {
+		local \$/;
+		open(my \$fh, '<', '${2:filename}') || die \$!;
+		<\$fh>;
+	};
+	${0}
