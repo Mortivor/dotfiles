@@ -40,4 +40,6 @@ Used are:
 * [tagbar](https://github.com/majutsushi/tagbar): View outline of file
 * [tlib\_vim](https://github.com/tomtom/tlib_vim): Needed for _snipmate_
 * [vim-addon-mw-utils](https://github.com/MarcWeber/vim-addon-mw-utils): Needed for _snipmate_
+* [vim-css-color](https://github.com/ap/vim-css-color): Colorize CSS color definitions
+* [vim-javascript](https://github.com/pangloss/vim-javascript): Syntax-Highlighting for JavaScript
 * [vim-json](https://github.com/elzr/vim-json): Hightlight JSON-Files

@@ -11,6 +11,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'pangloss/vim-javascript'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -27,6 +28,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'xuyuanp/nerdtree-git-plugin'
+Plugin 'ap/vim-css-color'
 
 call vundle#end()
 
