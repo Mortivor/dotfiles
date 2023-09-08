@@ -3,11 +3,17 @@ My Bash and VIM configuration
 
 # Compatability
 
-Testet on Debian 11 (Bullseye) so far.
+Testet on
+
+* Debian 11 (_Bullseye_)
+* Debian 10 (_Buster_)
+
+so far.
 
 ## Install
 
 * Clone this repo to ~/dotfiles and execute `install.sh` or take the parts you want.
+* _Hint_: Error Message _E185: Cannot find color scheme 'desert256'_ during script-run is normal. Just skip with Enter.
 * Alter your Author-Information in `.gitconfig`.
 
 ## Update
