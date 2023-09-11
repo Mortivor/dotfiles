@@ -10,7 +10,7 @@ for FILE in "${FILES[@]}"; do
 	ln -s "$HOME/dotfiles/$FILE" "$HOME/$FILE"
 done
 
-source .bashrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git submodule init && git submodule update
 vim +PluginInstall +qall
+echo "Install complete. Please reload .bashrc ('source .bashrc')."
