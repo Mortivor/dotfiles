@@ -13,8 +13,8 @@ so far.
 
 ## Install
 
-* Clone this repo to ~/dotfiles and execute `install.sh` or take the parts you want.
-* cd into `~/dotfiles`.
+* _cd_ into your homedir (`~`).
+* Clone this repo, _cd_ into `~/dotfiles` and execute `install.sh` or take the parts you want.
 * Alter your Author-Information in `.gitconfig`.
 * Reload _bashrc_: `source .bashrc`.
 
