@@ -29,6 +29,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'ap/vim-css-color'
+Plugin 'rodjek/vim-puppet'
 
 call vundle#end()
 
