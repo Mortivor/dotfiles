@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get -y install git vim universal-ctags most neofetch libxml2-utils python3
+apt-get -qq install git vim universal-ctags most neofetch libxml2-utils python3
 
 FILES=(.bashrc .vimrc .neofetch.conf .gitconfig)
 for FILE in "${FILES[@]}"; do
