@@ -49,7 +49,10 @@ autocmd ColorScheme * highlight! link SignColumn LineNr
 if !has('gui_running')
 	set t_co=256
 endif
-colorscheme desert256
+try
+	colorscheme desert256
+catch
+endtry
 syntax on
 
 "
