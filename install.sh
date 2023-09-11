@@ -13,4 +13,6 @@ done
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git submodule init && git submodule update
 vim +PluginInstall +qall
-echo "Install complete. Please reload .bashrc ('source .bashrc')."
+echo "Install complete."
+echo "The Plugin-Manager in VIM is Vundle. To update your plugins, type ':PluginUpdate' in VIM or 'vim +PluginUpdate +qall' in your terminal."
+echo "Please reload .bashrc ('source .bashrc')."
