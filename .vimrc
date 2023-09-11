@@ -11,9 +11,9 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'pangloss/vim-javascript'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'ap/vim-css-color'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'dense-analysis/ale'
 Plugin 'desert256.vim'
@@ -24,12 +24,12 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'maximbaz/lightline-ale'
 Plugin 'mengelbrecht/lightline-bufferline'
+Plugin 'pangloss/vim-javascript'
+Plugin 'rodjek/vim-puppet'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'xuyuanp/nerdtree-git-plugin'
-Plugin 'ap/vim-css-color'
-Plugin 'rodjek/vim-puppet'
 
 call vundle#end()
 
