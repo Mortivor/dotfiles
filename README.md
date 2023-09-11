@@ -14,7 +14,7 @@ so far.
 ## Install
 
 * Clone this repo to ~/dotfiles and execute `install.sh` or take the parts you want.
-* _Hint_: Error Message _E185: Cannot find color scheme 'desert256'_ during script-run is normal. Just skip with Enter.
+* cd into `~/dotfiles`.
 * Alter your Author-Information in `.gitconfig`.
 * Reload _bashrc_: `source .bashrc`.
 
