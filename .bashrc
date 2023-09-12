@@ -19,13 +19,10 @@ HISTIGNORE=ls:ll:exit:history:top:htop:cd:vim:
 ## Aliases ##
 #############
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias ll='ls -lh'
-alias cd..='cd ..'
-alias locate='locate -i'
-alias df='df -h'
-alias duall='du -sh * | sort -h'
+if [ -f ~/.bash_aliases ]; then
+	. ~/.bash_aliases
+fi
+
 
 ##################
 ## System-Infos ##
