@@ -80,7 +80,7 @@ set smartcase
 " Sonstiges
 "
 
-let &listchars="tab:| ,eol:$,trail:\u2022,nbsp:\u00d7"
+let &listchars="tab:| ,eol:$,trail:\u00b7,nbsp:\u00d7"
 let mapleader=","
 set backspace=indent,eol,start
 set cursorline
