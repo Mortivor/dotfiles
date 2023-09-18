@@ -5,3 +5,6 @@ alias cd..='cd ..'
 alias locate='locate -i'
 alias df='df -h'
 alias duall='du -sh * | sort -h'
+
+alias sysinfo='uname -a && echo "" && cat /etc/os-release && echo "" && lsb_release -a'
+alias sysinfo_mac='uname -a && echo "" && sw_vers'
