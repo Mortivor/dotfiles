@@ -14,7 +14,7 @@ so far.
 ## Install
 
 * _cd_ into your homedir (`~`).
-* Clone this repo, _cd_ into `~/dotfiles` and execute `install.sh` or take the parts you want.
+* Clone this repo, _cd_ into `~/dotfiles` and execute `bash dotfiles/install.sh` or take the parts you want.
 * Alter your Author-Information in `.gitconfig`.
 * Reload _bashrc_: `source .bashrc`.
 

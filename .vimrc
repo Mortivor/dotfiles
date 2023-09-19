@@ -133,10 +133,10 @@ let g:lightline={
 	\ 'colorscheme': 'PaperColor',
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste'],
-	\             [ 'gitbranch', 'gitstatus', 'readonly', 'filename', 'modified' ] ],
+	\             [ 'gitbranch', 'gitstatus' ],
+	\             [ 'readonly', 'relativepath', 'modified' ] ],
 	\   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
-	\              [ 'lineinfo' ],
-	\              [ 'percent' ],
+	\              [ 'percent', 'lineinfo' ],
 	\              [ 'charhexvalue', 'fileformat', 'fileencoding', 'filetype' ] ]
 	\ },
 	\ 'tabline': {
@@ -164,6 +164,12 @@ let g:lightline={
 	\   'gitstatus': "%{GitStatus()}"
 	\ },
 \ }
+
+"
+" Bufferline
+"
+
+let g:lightline#bufferline#smart_path=0
 
 "
 " CtrlP
