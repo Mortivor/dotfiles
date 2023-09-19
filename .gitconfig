@@ -1,6 +1,6 @@
 [user]
 	name = Christian Lange
-	email = cl@ariva.de
+	email = christian.lange.81@googlemail.com
 [core]
 	pager = "diff-so-fancy | less --tabs=4 -RFX"
 	editor = "vim"
@@ -12,8 +12,10 @@
 	ls = !git log -200 --pretty=format:'%C(red)%h %C(magenta)%cd %Creset%s%C(cyan) [%cn]%Creset' --decorate --date=short --no-merges
 	ll = !git log -200 --pretty=format:'%C(red)%h %C(magenta)%cd %Creset%s%C(cyan) [%cn]%Creset' --decorate --date=short --numstat --no-merges
 	lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset [Parents: %C(bold yellow)%p%Creset]' --abbrev-commit --date=relative
+	gl = !git config --global -l
 	mycommits = !git log origin/Development..HEAD --pretty=oneline --no-merges # alle meine Commits die ich submitten würde
 	mycommitsext = !git log origin/Development..HEAD --pretty=medium --no-merges # alle meine Commits die ich submitten würde (ausführlicher)
+	myfiles = !git diff origin/Development..HEAD --no-merges --name-only # alle Dateien die ich commiten würde
 [color]
 	ui = auto
 [color "diff-highlight"]
