@@ -58,6 +58,10 @@ export GIT_MERGE_AUTOEDIT=no
 # ein etwas informativerer Prompt im Terminal-Fenster
 export PS1='\[\033[1;36m\][\t] \[\033[1;32m\]\u@\h:\w\[\033[31m\] ($(git branch 2>/dev/null | cut -f2 -d\* -s | tr -d " ")) \[\033[01;34m\]$\[\033[00m\] '
 
+if [ -x /usr/bin/dircolors ]; then
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
 if [ -f ~/.bash_aliases ]
 then
 	. ~/.bash_aliases
