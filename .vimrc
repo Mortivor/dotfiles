@@ -1,13 +1,36 @@
+" *********************
+" * Plugin Management *
+" *********************
+
 set nocompatible
 filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/dotfiles
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ap/vim-css-color'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'desert256.vim'
+Plugin 'https://github.com/airblade/vim-gitgutter.git'
+Plugin 'scrooloose/nerdtree'
+Plugin 'elzr/vim-json'
+Plugin 'godlygeek/tabular'
+Plugin 'itchyny/lightline.vim'
+Plugin 'mengelbrecht/lightline-bufferline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'majutsushi/tagbar'
+Plugin 'tomtom/tlib_vim'
+Plugin 'xuyuanp/nerdtree-git-plugin'
+call vundle#end()
 
 " *********************************************************************
 " * Identifikation des OS (wichtig für ein paar Fallunterscheidungen) *
 " *********************************************************************
 
-if substitute(system("which sw_vers"), "\n", "", "") != ""
+if executable("sw_vers")
 	let s:os = "macos"
-elseif substitute(system("lsb_release"), "\n", "", "") != ""
+elseif executable("lsb_release")
 	let s:os = "linux"
 endif
 
@@ -15,10 +38,16 @@ endif
 " * Farben & Highlighting *
 " *************************
 
+" HTML/Mason-Syntaxhighlighting laden (standardmäßig ist das nicht geladen)
 autocmd Syntax mason so $VIMRUNTIME/syntax/mason.vim
-autocmd BufNewFile,BufRead *.m set ft = mason
-autocmd BufNewFile,BufRead *.json set ft = json
+" *.m Dateien als HTML/Mason behandeln
+autocmd BufNewFile,BufRead *.m set ft=mason
+" *.json Dateien als JSON behandeln
+autocmd BufNewFile,BufRead *.json set ft=json
+" Die GitGutter-Spalte solle einen "normalen" Hintergrund haben. Diese Anweisung muß vor der Auswahl des ColorScheme stehen.
+autocmd ColorScheme * highlight! link SignColumn LineNr
 
+colorscheme desert256
 syntax on
 
 " ****************
@@ -71,6 +100,8 @@ set scrolloff=3
 set shiftwidth=4
 " ein <tab> ist vier Leerzeichen lang
 set tabstop=4
+" Schnelleres Wechseln zwischen den Modi
+set ttimeoutlen=50
 
 " **************************
 " * Swap- und Temp-Dateien *
@@ -114,6 +145,13 @@ map <F4> :NERDTreeToggle<CR>
 map <F5> :TagbarToggle<CR>
 map <F6> :set list!<CR>
 map <F10> :nohlsearch<CR>
+if executable("python3")
+	autocmd Filetype json map <F9> :%!python3 -m json.tool<CR>
+elseif executable("python2")
+	autocmd Filetype json map <F9> :%!python2 -m json.tool<CR>
+elseif executable("python")
+	autocmd Filetype json map <F9> :%!python -m json.tool<CR>
+endif
 
 " Einrückungen per "<" und ">" auch im Visual Mode
 vnoremap < <gv
@@ -131,3 +169,108 @@ nmap <Leader>bq :bp<BAR>bd #<CR>
 " Suchtreffer zentrieren
 nmap n nzz
 nmap N Nzz
+
+" *****************************
+" * Einstellungen für Plugins *
+" *****************************
+
+" *** NERDTREE
+
+" Fenster etwas größer
+let g:NERDTreeWinSize = 42
+" Ist NERDTree offen und der letzte "normale" Buffer wird geschlossen, VIM auch schließen
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b.NERDTree.isTabTree()) | q | endif
+
+" *** GitGutter
+
+" Update GitGutter Symbole beim Speichern von Dateien
+autocmd BufWritePost * GitGutter
+let g:gitgutter_map_keys = 0
+
+" *** CtrlP
+
+" Keine Begrenzung der Dateien in CtrlP
+let g:ctrlp_max_files = 0
+" Bestimmte Dateien ignorieren
+let g:ctrlp_custom_ignore = {
+	\ 'dir': '\v[\/]\.git$',
+	\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|gif|ico)$'
+\ }
+
+" *** VIM-JSON
+
+" Syntaxdetails (z.B. Anführungszeichen) nicht ausblenden
+let g:vim_json_syntax_conceal = 0
+
+" *** Lightline
+
+function! LightlineDisplayGitBranch()
+	return "\U2387 %{FugitiveHead()}"
+endfunction
+
+function! GitStatus()
+	let [a,m,r] = GitGutterGetHunkSummary()
+	return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+let g:lightline={
+	\ 'colorscheme': 'jellybeans',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste'],
+	\             [ 'gitbranch', 'gitstatus' ],
+	\             [ 'readonly', 'relativepath', 'modified' ] ],
+	\   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+	\              [ 'percent', 'lineinfo' ],
+	\              [ 'charhexvalue', 'fileformat', 'fileencoding', 'filetype' ] ]
+	\ },
+	\ 'tabline': {
+	\   'left': [ ['buffers'] ],
+	\ },
+	\ 'component_expand': {
+	\   'buffers': 'lightline#bufferline#buffers',
+	\   'linter_checking': 'lightline#ale#checking',
+	\   'linter_infos': 'lightline#ale#infos',
+	\   'linter_warnings': 'lightline#ale#warnings',
+	\   'linter_errors': 'lightline#ale#errors',
+	\   'linter_ok': 'lightline#ale#ok'
+	\ },
+	\ 'component_type': {
+	\   'buffers': 'tabsel',
+	\   'linter_errors': 'error',
+	\   'linter_ok': 'right',
+	\   'linter_checking': 'right',
+	\   'linter_infos': 'right',
+	\   'linter_warnings': 'warning'
+	\ },
+	\ 'component': {
+	\   'charhexvalue': '0x%B',
+	\   'gitbranch': LightlineDisplayGitBranch(),
+	\   'gitstatus': "%{GitStatus()}"
+	\ },
+\ }
+
+" *** Bufferline
+
+let g:lightline#bufferline#smart_path=0
+
+" *** tagbar
+
+let g:tagbar_ctags_bin = '/opt/homebrew/opt/ctags-exuberant/bin/ctags'
+
+" *********************
+" * Eigene Funktionen *
+" *********************
+
+" funktioniert nicht oO
+
+inoremap <silent> <Bar> <Bar><Esc>:call <SID>align()<CR>a
+function! s:align()
+	let p = '^\s*|\s.*\s|\s*$'
+	if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+		let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+		let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+		Tabularize/|/l1
+		normal! 0
+		call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+	endif
+endfunction
