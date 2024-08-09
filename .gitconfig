@@ -1,0 +1,35 @@
+[user]
+	name = Christian Lange
+	email = cl@ariva.de
+[core]
+	page = "diff-so-fancy | less --tabs=4 -RFX"
+	editor = vim
+[diff]
+	ignoreSubmodules = all
+[i18n]
+	commitencoding = UTF-8
+[merge]
+	tool = vimdiff
+[alias]
+	ls = !git log -200 --pretty=format:'%C(red)%h %C(magenta)%cd %Creset%s%C(cyan) [%cn]%Creset' --decorate --date=short --no-merges
+	ll = !git log -200 --pretty=format:'%C(red)%h %C(magenta)%cd %Creset%s%C(cyan) [%cn]%Creset' --decorate --date=short --numstat --no-merges
+	lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset [Parents: %C(bold yellow)%p%Creset]' --abbrev-commit --date=relative
+[color]
+	ui = auto
+[color "diff-highlight"]
+	oldNormal = "red bold"
+	oldHighlight = "red bold 52"
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = "11"
+	frag = "magenta bold"
+	func = "146 bold"
+	commit = "yellow bold"
+	old = "red bold"
+	new = "green bold"
+	whitespace = "red reverse"
+[color "status"]
+	added = "yellow bold"
+	changed = "red bold"
+	untracked = "cyan bold"

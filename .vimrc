@@ -7,20 +7,20 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/dotfiles
 call vundle#begin()
+Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'desert256.vim'
-Plugin 'https://github.com/airblade/vim-gitgutter.git'
-Plugin 'scrooloose/nerdtree'
 Plugin 'elzr/vim-json'
 Plugin 'godlygeek/tabular'
+Plugin 'https://github.com/airblade/vim-gitgutter.git'
 Plugin 'itchyny/lightline.vim'
-Plugin 'mengelbrecht/lightline-bufferline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'majutsushi/tagbar'
+Plugin 'mengelbrecht/lightline-bufferline'
+Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
@@ -255,7 +255,9 @@ let g:lightline#bufferline#smart_path=0
 
 " *** tagbar
 
-let g:tagbar_ctags_bin = '/opt/homebrew/opt/ctags-exuberant/bin/ctags'
+if s:os == "macos"
+	let g:tagbar_ctags_bin = '/opt/homebrew/opt/ctags-exuberant/bin/ctags'
+endif
 
 " *********************
 " * Eigene Funktionen *
