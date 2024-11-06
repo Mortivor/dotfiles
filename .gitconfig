@@ -4,6 +4,7 @@
 [core]
 	pager = "diff-so-fancy | less --tabs=4 -RFX"
 	editor = vim
+	excludesFile = '~/.gitignore'
 [diff]
 	ignoreSubmodules = all
 [i18n]
@@ -11,9 +12,10 @@
 [merge]
 	tool = vimdiff
 [alias]
-	ls = !git log -200 --pretty=format:'%C(red)%h %C(magenta)%cd %Creset%s%C(cyan) [%cn]%Creset' --decorate --date=short --no-merges
-	ll = !git log -200 --pretty=format:'%C(red)%h %C(magenta)%cd %Creset%s%C(cyan) [%cn]%Creset' --decorate --date=short --numstat --no-merges
-	lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset [Parents: %C(bold yellow)%p%Creset]' --abbrev-commit --date=relative
+	unadd = restore --staged
+	ls = log --no-merges --decorate=short --pretty=format:'%C(red)%h %C(green)%cs (%cr) %C(bold blue)%aN%C(auto)%d%C(reset) %s'
+	ll = log --no-merges --decorate=short --pretty=format:'%C(red)%h %C(green)%ci (%cr) %C(bold blue)%aN%C(auto)%d%C(reset) %s' --numstat
+	lg = log --graph --pretty=format:'%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)%cr %C(bold blue)%aN%C(reset) [Parents: %C(bold yellow)%p%Creset]' --abbrev-commit --date=relative
 [color]
 	ui = auto
 [color "diff-highlight"]

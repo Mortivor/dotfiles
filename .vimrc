@@ -102,6 +102,8 @@ set shiftwidth=4
 set tabstop=4
 " Schnelleres Wechseln zwischen den Modi
 set ttimeoutlen=50
+" Buffer-Wechsel auch bei nicht-gespeicherten Änderungen
+set hidden
 
 " **************************
 " * Swap- und Temp-Dateien *
