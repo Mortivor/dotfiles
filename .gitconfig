@@ -4,7 +4,7 @@
 [core]
 	pager = "diff-so-fancy | less --tabs=4 -RFX"
 	editor = vim
-	excludesFile = '~/.gitignore'
+	excludesfile = ~/.gitignore
 [diff]
 	ignoreSubmodules = all
 [i18n]

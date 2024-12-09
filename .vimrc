@@ -147,6 +147,7 @@ map <F4> :NERDTreeToggle<CR>
 map <F5> :TagbarToggle<CR>
 map <F6> :set list!<CR>
 map <F10> :nohlsearch<CR>
+autocmd Filetype xml map <F9> :%!xmllint --format -<CR>
 if executable("python3")
 	autocmd Filetype json map <F9> :%!python3 -m json.tool<CR>
 elseif executable("python2")
