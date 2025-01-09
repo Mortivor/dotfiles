@@ -15,4 +15,3 @@ alias ekp_up='docker compose -f ~/git_repos/UBS\ EasyKID\ Pro/EasyKID_Pro/docker
 alias ekp_down='docker compose -f ~/git_repos/UBS\ EasyKID\ Pro/EasyKID_Pro/docker-compose-dev.yaml down'
 alias ekp_restart_apache='docker exec easykid-pro-web rm -fr /var/cache/mason/* && docker exec easykid-pro-web apache2ctl graceful'
 alias ekp_restart='ekp_down && ekp_up'
-alias start_ekp_osa='osascript ~/start_ekp.scpt'
