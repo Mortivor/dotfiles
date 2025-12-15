@@ -1,10 +1,10 @@
-OS=""
-if command -v "lsb_release" &> /dev/null
-then
+OS="unknown"
+if command -v lsb_release >/dev/null 2>&1; then
 	OS="linux"
-elif command -v "sw_vers" &> /dev/null
-then
+elif command -v sw_vers >/dev/null 2>&1; then
 	OS="macos"
+elif [ "$(uname -s)" = "Linux" ]; then
+	OS="linux"
 fi
 
 ################
@@ -50,8 +50,31 @@ export PATH=$PATH:/sbin:~/dotfiles/diff-so-fancy
 # Das hier kommt für MacOS noch dazu, hier brauchen wir Homebrew. Gibt ja kein apt-get.
 if [[ $OS == "macos" ]]
 then
-	export PATH=$PATH:/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/bin
-	export PATH=/opt/homebrew/opt/grep/libexec/gnubin:$PATH
+	# Homebrew Pfade (konsolidierte Verwaltung)
+	local homebrew_paths=(
+		"/opt/homebrew/bin"
+		"/opt/homebrew/sbin"
+		"/opt/homebrew/opt/mysql-client/bin"
+		"/opt/homebrew/opt/node@22/bin"
+		"/opt/homebrew/opt/grep/libexec/gnubin"
+	)
+
+	# ctags (falls installiert - Priorität vor anderen Pfaden)
+	if [ -d "/opt/homebrew/opt/universal-ctags/bin" ]; then
+		homebrew_paths=("/opt/homebrew/opt/universal-ctags/bin" "${homebrew_paths[@]}")
+	elif [ -d "/opt/homebrew/opt/ctags-exuberant/bin" ]; then
+		homebrew_paths=("/opt/homebrew/opt/ctags-exuberant/bin" "${homebrew_paths[@]}")
+	fi
+
+	# PATH zusammenbauen (einmaliger Export)
+	local new_path
+	printf -v new_path "%s:" "${homebrew_paths[@]}"
+	export PATH="${new_path%:}$PATH"
+
+	# uv (Python Paketmanager)
+	if [ -f "$HOME/.local/bin/env" ]; then
+		. "$HOME/.local/bin/env"
+	fi
 fi
 # beim "git pull" nicht immer noch eine Commit-Message eingeben müssen
 export GIT_MERGE_AUTOEDIT=no

@@ -24,16 +24,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
-" *********************************************************************
-" * Identifikation des OS (wichtig für ein paar Fallunterscheidungen) *
-" *********************************************************************
-
-if executable("sw_vers")
-	let s:os = "macos"
-elseif executable("lsb_release")
-	let s:os = "linux"
-endif
-
 " *************************
 " * Farben & Highlighting *
 " *************************
@@ -143,10 +133,10 @@ set showtabline=2
 " CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo, so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
-map <F4> :NERDTreeToggle<CR>
-map <F5> :TagbarToggle<CR>
-map <F6> :set list!<CR>
-map <F10> :nohlsearch<CR>
+nnoremap <F4> :NERDTreeToggle<CR>
+nnoremap <F5> :TagbarToggle<CR>
+nnoremap <F6> :set list!<CR>
+nnoremap <F10> :nohlsearch<CR>
 autocmd Filetype xml map <F9> :%!xmllint --format -<CR>
 if executable("python3")
 	autocmd Filetype json map <F9> :%!python3 -m json.tool<CR>
@@ -165,9 +155,9 @@ vnoremap / /\v
 nnoremap / /\v
 
 " Buffernavigation
-nmap <Leader>l :bnext<CR>
-nmap <Leader>h :bprev<CR>
-nmap <Leader>bq :bp<BAR>bd #<CR>
+nnoremap <Leader>l :bnext<CR>
+nnoremap <Leader>h :bprev<CR>
+nnoremap <Leader>bq :bp<CR>:bd#<CR>:redrawstatus!
 
 " Suchtreffer zentrieren
 nmap n nzz
@@ -255,12 +245,6 @@ let g:lightline={
 " *** Bufferline
 
 let g:lightline#bufferline#smart_path=0
-
-" *** tagbar
-
-if s:os == "macos"
-	let g:tagbar_ctags_bin = '/opt/homebrew/opt/ctags-exuberant/bin/ctags'
-endif
 
 " *********************
 " * Eigene Funktionen *
