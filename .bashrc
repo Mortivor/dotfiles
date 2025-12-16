@@ -1,3 +1,7 @@
+###########################
+# 1. System Konfiguration #
+###########################
+
 OS="unknown"
 if command -v lsb_release >/dev/null 2>&1; then
 	OS="linux"
@@ -7,9 +11,9 @@ elif [ "$(uname -s)" = "Linux" ]; then
 	OS="linux"
 fi
 
-################
-# Bash-History #
-################
+#################################
+# 2. Bash-History Einstellungen #
+#################################
 
 ## siehe auch http://www.techrepublic.com/article/linux-command-line-tips-history-and-histignore-in-bash/
 ## siehe auch https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
@@ -27,9 +31,9 @@ HISTFILESIZE=6000
 # Bestimmte Befehle nicht mit speichern
 HISTIGNORE=ls:ll:exit:history:top:htop:cd:vim:
 
-########################
-## Verschiedene Dinge ##
-########################
+###########################
+## 3. $PATH Konfiguration #
+###########################
 
 if [[ $OS == "macos" ]]
 then
@@ -93,10 +97,28 @@ then
 		. "$HOME/.local/bin/env"
 	fi
 fi
-# beim "git pull" nicht immer noch eine Commit-Message eingeben müssen
-export GIT_MERGE_AUTOEDIT=no
+
+###########################
+# 4. PROMPT Konfiguration #
+###########################
+
 # ein etwas informativerer Prompt im Terminal-Fenster
 export PS1='\[\033[1;36m\][\t] \[\033[1;32m\]\u@\h:\w\[\033[31m\] ($(git branch 2>/dev/null | cut -f2 -d\* -s | tr -d " ")) \[\033[01;34m\]$\[\033[00m\] '
+
+############################
+# 5. Einstellungen für Git #
+############################
+
+# beim "git pull" nicht immer noch eine Commit-Message eingeben müssen
+export GIT_MERGE_AUTOEDIT=no
+
+if [ -f ~/.git-completion.bash ]; then
+	. ~/.git-completion.bash
+fi
+
+################################################################################
+# 6. Aus der Standard-Bash Konfiguration (dircolors, Aliases, Bash-Completion) #
+################################################################################
 
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -118,9 +140,9 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-if [ -f ~/.git-completion.bash ]; then
-	. ~/.git-completion.bash
-fi
+#######################
+# 7. Hilfs-Funktionen #
+#######################
 
 debug_bash() {
 	echo "===== BASH DEBUG INFO ====="
