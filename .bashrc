@@ -47,11 +47,29 @@ fi
 
 # /sbin in den Systempfad mit aufnehmen damit man aus Bequemlichkeitsgründen z.B. ifconfig direkt aufrufen kann
 export PATH=$PATH:/sbin:~/dotfiles/diff-so-fancy
+
+# Funktion zum Bereinigen des PATH (Duplikate entfernen)
+clean_path() {
+    local old_path="$1"
+    local new_path
+    local -A seen
+
+    IFS=':' read -ra paths <<< "$old_path"
+    for path in "${paths[@]}"; do
+        [[ -n "$path" && -z "${seen[$path]}" ]] && {
+            new_path+="${new_path:+:}$path"
+            seen["$path"]=1
+        }
+    done
+
+    echo "$new_path"
+}
+
 # Das hier kommt für MacOS noch dazu, hier brauchen wir Homebrew. Gibt ja kein apt-get.
 if [[ $OS == "macos" ]]
 then
 	# Homebrew Pfade (konsolidierte Verwaltung)
-	local homebrew_paths=(
+	homebrew_paths=(
 		"/opt/homebrew/bin"
 		"/opt/homebrew/sbin"
 		"/opt/homebrew/opt/mysql-client/bin"
@@ -66,10 +84,9 @@ then
 		homebrew_paths=("/opt/homebrew/opt/ctags-exuberant/bin" "${homebrew_paths[@]}")
 	fi
 
-	# PATH zusammenbauen (einmaliger Export)
-	local new_path
+	# PATH zusammenbauen und Duplikate entfernen
 	printf -v new_path "%s:" "${homebrew_paths[@]}"
-	export PATH="${new_path%:}$PATH"
+	export PATH=$(clean_path "${new_path%:}$PATH")
 
 	# uv (Python Paketmanager)
 	if [ -f "$HOME/.local/bin/env" ]; then
@@ -104,3 +121,18 @@ fi
 if [ -f ~/.git-completion.bash ]; then
 	. ~/.git-completion.bash
 fi
+
+debug_bash() {
+	echo "===== BASH DEBUG INFO ====="
+	echo "Bash Version: $BASH_VERSION"
+	echo "Current Path:"
+	echo "$PATH" | tr ':' '\n' | nl
+	echo "Loaded files:"
+	echo "  .bashrc: $BASH_SOURCE"
+	echo "Shell Options:"
+	echo "  histappend: $(shopt -q histappend && echo 'ON' || echo 'OFF')"
+	echo "  globstar: $(shopt -q globstar && echo 'ON' || echo 'OFF')"
+	echo "  nocasematch: $(shopt -q nocasematch && echo 'ON' || echo 'OFF')"
+	echo "  nullglob: $(shopt -q nullglob && echo 'ON' || echo 'OFF')"
+	echo "==========================="
+}
