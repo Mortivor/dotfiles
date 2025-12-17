@@ -103,7 +103,12 @@ fi
 ###########################
 
 # ein etwas informativerer Prompt im Terminal-Fenster
-export PS1='\[\033[1;36m\][\t] \[\033[1;32m\]\u@\h:\w\[\033[31m\] ($(git branch 2>/dev/null | cut -f2 -d\* -s | tr -d " ")) \[\033[01;34m\]$\[\033[00m\] '
+PROMPT_COLOR_TIME='\[\033[1;36m\]'
+PROMPT_COLOR_USER='\[\033[1;32m\]'
+PROMPT_COLOR_GIT='\[\033[31m\]'
+PROMPT_COLOR_PROMPT='\[\033[01;34m\]'
+PROMPT_COLOR_RESET='\[\033[00m\]'
+export PS1="${PROMPT_COLOR_TIME}[\t] ${PROMPT_COLOR_USER}\u@\h:\w ${PROMPT_COLOR_GIT}($(git rev-parse --abbrev-ref HEAD 2>/dev/null)) ${PROMPT_COLOR_PROMPT}$ ${PROMPT_COLOR_RESET}"
 
 ############################
 # 5. Einstellungen für Git #
