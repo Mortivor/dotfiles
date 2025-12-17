@@ -90,7 +90,7 @@ then
 
 	# PATH zusammenbauen und Duplikate entfernen
 	printf -v new_path "%s:" "${homebrew_paths[@]}"
-	export PATH=$(clean_path "${new_path%:}$PATH")
+	export PATH=$(clean_path "$PATH:${new_path%:}")
 
 	# uv (Python Paketmanager)
 	if [ -f "$HOME/.local/bin/env" ]; then
