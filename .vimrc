@@ -157,7 +157,7 @@ nnoremap / /\v
 " Buffernavigation
 nnoremap <Leader>l :bnext<CR>
 nnoremap <Leader>h :bprev<CR>
-nnoremap <Leader>bq :bp<CR>:bd#<CR>:redrawstatus!
+nnoremap <Leader>bq :bp<CR>:bd#<CR>:redrawstatus!<CR>
 
 " Suchtreffer zentrieren
 nmap n nzz
