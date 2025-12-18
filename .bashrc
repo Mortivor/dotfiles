@@ -23,8 +23,6 @@ fi
 HISTCONTROL=ignoreboth
 # An die History anhängen statt sie jedesmal zu überschreiben
 shopt -s histappend
-# Sofort in die History schreiben, nicht erst bei Schließen der Terminal-Session
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # Länge der History setzen
 HISTSIZE=6000
 HISTFILESIZE=6000
@@ -90,7 +88,7 @@ then
 
 	# PATH zusammenbauen und Duplikate entfernen
 	printf -v new_path "%s:" "${homebrew_paths[@]}"
-	export PATH=$(clean_path "$PATH:${new_path%:}")
+	export PATH=$(clean_path "${new_path%:}:$PATH")
 
 	# uv (Python Paketmanager)
 	if [ -f "$HOME/.local/bin/env" ]; then
@@ -102,13 +100,31 @@ fi
 # 4. PROMPT Konfiguration #
 ###########################
 
-# ein etwas informativerer Prompt im Terminal-Fenster
-PROMPT_COLOR_TIME='\[\033[1;36m\]'
-PROMPT_COLOR_USER='\[\033[1;32m\]'
-PROMPT_COLOR_GIT='\[\033[31m\]'
-PROMPT_COLOR_PROMPT='\[\033[01;34m\]'
-PROMPT_COLOR_RESET='\[\033[00m\]'
-export PS1="${PROMPT_COLOR_TIME}[\t] ${PROMPT_COLOR_USER}\u@\h:\w ${PROMPT_COLOR_GIT}($(git rev-parse --abbrev-ref HEAD 2>/dev/null)) ${PROMPT_COLOR_PROMPT}$ ${PROMPT_COLOR_RESET}"
+__update_git_prompt() {
+	local branch
+	branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+	if [ -n "$branch" ]; then
+		__git_ps1="($branch) "
+	else
+		__git_ps1=""
+	fi
+}
+
+COLOR_LIGHT_CYAN='\[\033[1;36m\]'
+COLOR_LIGHT_GREEN='\[\033[1;32m\]'
+COLOR_LIGHT_BLUE='\[\033[01;34m\]'
+COLOR_RED='\[\033[31m\]'
+COLOR_RESET='\[\033[00m\]'
+
+# PROMPT_COMMAND aktualisieren, um
+# a) die History sofort zu schreiben, nicht erst wenn das Terminal geschlossen wird und
+# b) den Git-Branch dynamisch zu ermitteln
+PROMPT_COMMAND="history -a; __update_git_prompt; $PROMPT_COMMAND"
+export PS1="${COLOR_LIGHT_CYAN}[\t] \
+${COLOR_LIGHT_GREEN}\u@\h:\w \
+${COLOR_RED}\${__git_ps1:-}\
+${COLOR_LIGHT_BLUE}$ \
+${COLOR_RESET}"
 
 ################
 # 5. Sonstiges #
