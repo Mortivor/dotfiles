@@ -121,8 +121,16 @@ if [ -f ~/.git-completion.bash ]; then
 	. ~/.git-completion.bash
 fi
 
+###############################
+# 6. Dinge speziell für Ariva #
+###############################
+if [ -f ~/.bash_aliases_firmenspezifisch ]
+then
+	. ~/.bash_aliases_firmenspezifisch
+fi
+
 ################################################################################
-# 6. Aus der Standard-Bash Konfiguration (dircolors, Aliases, Bash-Completion) #
+# 7. Aus der Standard-Bash Konfiguration (dircolors, Aliases, Bash-Completion) #
 ################################################################################
 
 if [ -x /usr/bin/dircolors ]; then
@@ -146,7 +154,7 @@ if ! shopt -oq posix; then
 fi
 
 #######################
-# 7. Hilfs-Funktionen #
+# 8. Hilfs-Funktionen #
 #######################
 
 debug_bash() {
