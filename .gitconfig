@@ -7,6 +7,8 @@
 	excludesfile = ~/.gitignore
 [diff]
 	ignoreSubmodules = all
+[push]
+	autoSetupRemote = true
 [i18n]
 	commitencoding = UTF-8
 [merge]
