@@ -1,33 +1,45 @@
 # dotfiles
 
-## Installation
+Dies ist meine persönliche Sammlung von Konfigurationsdateien.
 
-VIM öffnen und `:VundleInstall` eingeben. Damit werden alle in der `.vimrc` angegebenen Plugins installiert.
-Die Dateien `.vimrc`, `.bashrc`, `.bash_aliases`, `.gitconfig` sowie das Verzeichnis `.vim` müssen als Symlink in ~ angelegt werden (z.B. `ln -s dotfiles/.bashrc .bashrc`).
+## Kompatible Systeme
 
-## Linux
+Die Dateien wurden entwickelt und getestet auf:
 
-Natürlich muß ein `apt-get install vim git` ausgeführt werden.
+* macOS 15.7 (Sequoia), mit Homebrew und Bash 5.3.8 als Shell
+* KDE Neon
+* Ubuntu (> 20.04)
+* Debian (> 10)
 
-### Exuberant-ctags
+## Zusätzliche Software
 
-`apt-get install universal-ctags` (z.B. unter Debian 10) oder aber `apt-get install exuberant-ctags` (z.B. unter Debian 9).
+Was hier noch gebraucht wird um "alles" zu haben:
 
-## MacOS
+* *Git*
+* *VIM*
+* *Universal Ctags* oder seinen Vorgänger *Exuberant Ctags*
 
-Git wird normal installiert. Aber dann gibt's ein paar Besonderheiten.
+Unter macOS muß zusätzlich noch über *Homebrew* installiert werden:
 
-### Homebrew
+* *grep* (`brew install grep`)
 
-Wir müssen hier [Homebrew](https://brew.sh/) installieren da MacOS ein paar veraltete und nicht kompatible Pakete mit sich bringt.
-
-#### Exuberant-ctags
-
-Die unter MacOS installierte Version der ctags funktioniert nicht mit dem Addon *tagbar*. Wir müssen also die exuberant-version installieren. `brew install ctags` ([ctags](https://formulae.brew.sh/formula/ctags)).
-Deswegen auch die Pfadanpassung in der `.vimrc`.
-
-#### Anderes
+### Installation
 
 Da MacOS eine sehr alte Version der Bash ausliefert müssen wir diese vllt. auch aktualisieren. Das kann man per Homebrew machen. Ich hab das damals mit einer Anleitung unter
 [https://itnext.io/upgrading-bash-on-macos-7138bd1066ba](https://itnext.io/upgrading-bash-on-macos-7138bd1066ba) gemacht. Da muß man aber mittlerweile einen Account erstellen um die Seite lesen zu können. Vllt. geht auch
 der Artikel unter [https://informatik.hs-bremerhaven.de/flignitz/tutorial/bash/](https://informatik.hs-bremerhaven.de/flignitz/tutorial/bash/)
+
+Die *Ctags* sind sehr einfach per `apt` (Linux) oder `brew` (macOS) installierbar.
+
+## Installation der dotfiles
+
+1. Dieses Repo klonen, am besten nach `~`.
+2. *diff-so-fancy* installieren: `git submodule update --init diff-so-fancy`
+3. VIM öffnen und `:VundleInstall` eingeben. Damit werden alle in der `.vimrc` angegebenen Plugins installiert.
+4. Symlinks anlegen:
+	* `~/.vim -> dotfiles/.vim`
+	* `~/.bashrc -> dotfiles/.bashrc`
+	* `~./.bash_aliases -> dotfiles/.bash_aliases`
+	* `~/.gitignore -> dotfiles/.gitignore`
+	* `~/.vimrc -> dotfiles/.vimrc`
+	* `~.gitconfig -> dotfiles/.gitconfig`
