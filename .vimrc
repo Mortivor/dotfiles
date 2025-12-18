@@ -28,14 +28,18 @@ call vundle#end()
 " * Farben & Highlighting *
 " *************************
 
-" HTML/Mason-Syntaxhighlighting laden (standardmäßig ist das nicht geladen)
-autocmd Syntax mason so $VIMRUNTIME/syntax/mason.vim
-" *.m Dateien als HTML/Mason behandeln
-autocmd BufNewFile,BufRead *.m set ft=mason
-" *.json Dateien als JSON behandeln
-autocmd BufNewFile,BufRead *.json set ft=json
-" Die GitGutter-Spalte solle einen "normalen" Hintergrund haben. Diese Anweisung muß vor der Auswahl des ColorScheme stehen.
-autocmd ColorScheme * highlight! link SignColumn LineNr
+augroup MyAutoCmds
+	" alle bestehenden Autocmds dieser Gruppe löschen
+	autocmd!
+	" HTML/Mason-Syntaxhighlighting laden (standardmäßig ist das nicht geladen)
+	autocmd Syntax mason so $VIMRUNTIME/syntax/mason.vim
+	" *.m Dateien als HTML/Mason behandeln
+	autocmd BufNewFile,BufRead *.m set ft=mason
+	" *.json Dateien als JSON behandeln
+	autocmd BufNewFile,BufRead *.json set ft=json
+	" Die GitGutter-Spalte solle einen "normalen" Hintergrund haben. Diese Anweisung muß vor der Auswahl des ColorScheme stehen.
+	autocmd ColorScheme * highlight! link SignColumn LineNr
+augroup END
 
 colorscheme desert256
 syntax on
@@ -137,14 +141,27 @@ nnoremap <F4> :NERDTreeToggle<CR>
 nnoremap <F5> :TagbarToggle<CR>
 nnoremap <F6> :set list!<CR>
 nnoremap <F10> :nohlsearch<CR>
-autocmd Filetype xml map <F9> :%!xmllint --format -<CR>
-if executable("python3")
-	autocmd Filetype json map <F9> :%!python3 -m json.tool<CR>
-elseif executable("python2")
-	autocmd Filetype json map <F9> :%!python2 -m json.tool<CR>
-elseif executable("python")
-	autocmd Filetype json map <F9> :%!python -m json.tool<CR>
+
+let g:python_executable = ''
+if executable('python3')
+	let g:python_executable = 'python3'
+elseif executable('python2')
+	let g:python_executable = 'python2'
+elseif executable('python')
+	let g:python_executable = 'python'
 endif
+
+function! JsonFormat()
+	if g:python_executable != ''
+		execute '%!'.g:python_executable.' -m json.tool'
+	endif
+endfunction
+
+augroup MyFiletypeMappings
+	autocmd!
+	autocmd Filetype xml nnoremap <buffer> <F9> :%!xmllint --format -<CR>
+	autocmd Filetype json nnoremap <buffer> <F9> :call JsonFormat()<CR>
+augroup END
 
 " Einrückungen per "<" und ">" auch im Visual Mode
 vnoremap < <gv
