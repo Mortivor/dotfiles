@@ -43,3 +43,10 @@ Die *Ctags* sind sehr einfach per `apt` (Linux) oder `brew` (macOS) installierba
 	* `~/.gitignore -> dotfiles/.gitignore`
 	* `~/.vimrc -> dotfiles/.vimrc`
 	* `~.gitconfig -> dotfiles/.gitconfig`
+
+## Update der Submodules
+
+```
+$ cd ~/dotfiles
+$ git submodule update --remote --recursive
+```
