@@ -14,7 +14,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'desert256.vim'
 Plugin 'elzr/vim-json'
 Plugin 'godlygeek/tabular'
-Plugin 'https://github.com/airblade/vim-gitgutter.git'
+Plugin 'airblade/vim-gitgutter.git'
 Plugin 'itchyny/lightline.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mengelbrecht/lightline-bufferline'
@@ -22,6 +22,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'xuyuanp/nerdtree-git-plugin'
+Plugin 'iamcco/markdown-preview.nvim'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'mattn/calendar-vim'
+Plugin 'dbeniamine/cheat.sh-vim'
 call vundle#end()
 
 " *************************
@@ -41,7 +45,8 @@ augroup MyAutoCmds
 	autocmd ColorScheme * highlight! link SignColumn LineNr
 augroup END
 
-colorscheme desert256
+set background=dark
+colorscheme PaperColor
 syntax on
 
 " ****************

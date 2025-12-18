@@ -24,7 +24,7 @@ Unter macOS muß zusätzlich noch über *Homebrew* installiert werden:
 
 * *grep* (`brew install grep`)
 
-### Installation
+## Installation
 
 Da MacOS eine sehr alte Version der Bash ausliefert müssen wir diese vllt. auch aktualisieren. Das kann man per Homebrew machen. Ich hab das damals mit einer Anleitung unter
 [https://itnext.io/upgrading-bash-on-macos-7138bd1066ba](https://itnext.io/upgrading-bash-on-macos-7138bd1066ba) gemacht. Da muß man aber mittlerweile einen Account erstellen um die Seite lesen zu können. Vllt. geht auch
@@ -32,7 +32,7 @@ der Artikel unter [https://informatik.hs-bremerhaven.de/flignitz/tutorial/bash/]
 
 Die *Ctags* sind sehr einfach per `apt` (Linux) oder `brew` (macOS) installierbar.
 
-## Installation der dotfiles
+### Installation der dotfiles
 
 1. Dieses Repo klonen, am besten nach `~`.
 2. *diff-so-fancy* installieren: `git submodule update --init diff-so-fancy`
@@ -45,9 +45,15 @@ Die *Ctags* sind sehr einfach per `apt` (Linux) oder `brew` (macOS) installierba
 	* `~/.vimrc -> dotfiles/.vimrc`
 	* `~.gitconfig -> dotfiles/.gitconfig`
 
-## Update der Submodules
+### Update der Submodules
 
 ```
 $ cd ~/dotfiles
 $ git submodule update --remote --recursive
 ```
+
+### Erläuterungen für Plugins
+
+#### markdown-preview
+
+Nach der Installation mit Vundle noch ausführen: `:call mkdp#util#install()`.
