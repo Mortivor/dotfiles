@@ -110,8 +110,16 @@ PROMPT_COLOR_PROMPT='\[\033[01;34m\]'
 PROMPT_COLOR_RESET='\[\033[00m\]'
 export PS1="${PROMPT_COLOR_TIME}[\t] ${PROMPT_COLOR_USER}\u@\h:\w ${PROMPT_COLOR_GIT}($(git rev-parse --abbrev-ref HEAD 2>/dev/null)) ${PROMPT_COLOR_PROMPT}$ ${PROMPT_COLOR_RESET}"
 
+################
+# 5. Sonstiges #
+################
+
+if command -v most >/dev/null 2>&1; then
+	export PAGER=most
+fi
+
 ############################
-# 5. Einstellungen für Git #
+# 6. Einstellungen für Git #
 ############################
 
 # beim "git pull" nicht immer noch eine Commit-Message eingeben müssen
@@ -122,7 +130,7 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 
 ###############################
-# 6. Dinge speziell für Ariva #
+# 7. Dinge speziell für Ariva #
 ###############################
 if [ -f ~/.bash_aliases_firmenspezifisch ]
 then
@@ -130,7 +138,7 @@ then
 fi
 
 ################################################################################
-# 7. Aus der Standard-Bash Konfiguration (dircolors, Aliases, Bash-Completion) #
+# 8. Aus der Standard-Bash Konfiguration (dircolors, Aliases, Bash-Completion) #
 ################################################################################
 
 if [ -x /usr/bin/dircolors ]; then
@@ -154,7 +162,7 @@ if ! shopt -oq posix; then
 fi
 
 #######################
-# 8. Hilfs-Funktionen #
+# 9. Hilfs-Funktionen #
 #######################
 
 debug_bash() {
@@ -170,4 +178,25 @@ debug_bash() {
 	echo "  nocasematch: $(shopt -q nocasematch && echo 'ON' || echo 'OFF')"
 	echo "  nullglob: $(shopt -q nullglob && echo 'ON' || echo 'OFF')"
 	echo "==========================="
+}
+
+extract() {
+	if [ -f $1 ]; then
+		case $1 in
+			*.tar.bz2)   tar xvjf $1    ;;
+			*.tar.gz)    tar xvzf $1    ;;
+			*.bz2)       bunzip2 $1     ;;
+			*.rar)       unrar x $1     ;;
+			*.gz)        gunzip $1      ;;
+			*.tar)       tar xvf $1     ;;
+			*.tbz2)      tar xvjf $1    ;;
+			*.tgz)       tar xvzf $1    ;;
+			*.zip)       unzip $1       ;;
+			*.Z)         uncompress $1  ;;
+			*.7z)        7z x $1        ;;
+			*)           echo "don't know how to extract '$1'..." ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
 }

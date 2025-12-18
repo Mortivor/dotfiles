@@ -18,6 +18,7 @@ Was hier noch gebraucht wird um "alles" zu haben:
 * *Git*
 * *VIM*
 * *Universal Ctags* oder seinen Vorgänger *Exuberant Ctags*
+* *most*
 
 Unter macOS muß zusätzlich noch über *Homebrew* installiert werden:
 
