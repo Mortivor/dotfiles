@@ -1,4 +1,5 @@
 alias ls='ls --color=auto'
+alias lsd='lsd --long'
 alias grep='grep --color=auto --binary-files=without-match'
 alias mkdir='mkdir -p'
 alias ps='ps aux'

@@ -18,7 +18,9 @@ Was hier noch gebraucht wird um "alles" zu haben:
 * *Git*
 * *VIM*
 * *Universal Ctags* oder seinen Vorgänger *Exuberant Ctags*
-* *most*
+* [most](https://github.com/jedsoft/most).
+* [lsd](https://github.com/Peltoche/lsd)
+* Einen [Nerd font](https://www.nerdfonts.com/). Ich hab derzeit *CascadiaCode* und *0xProto* installiert.
 
 Unter macOS muß zusätzlich noch über *Homebrew* installiert werden:
 

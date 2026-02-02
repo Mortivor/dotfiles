@@ -26,6 +26,7 @@ Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'mattn/calendar-vim'
 Plugin 'dbeniamine/cheat.sh-vim'
+Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 
 " *************************
@@ -193,13 +194,26 @@ nmap N Nzz
 
 " Fenster etwas größer
 let g:NERDTreeWinSize = 42
-" Ist NERDTree offen und der letzte "normale" Buffer wird geschlossen, VIM auch schließen
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b.NERDTree.isTabTree()) | q | endif
+augroup NERDTreeCommands
+	autocmd!
+	" Ist NERDTree offen und der letzte "normale" Buffer wird geschlossen, VIM auch schließen
+	if v:version >= 900 " VIM 9 oder höher
+		autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
+	else
+		autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	endif
+	" Wenn ein anderer Buffer versucht, NERDTree zu ersetzen, verschieben wir ihn in das andere Fenster und bringen NERDTree zurück.
+	autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+		\ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+augroup END
 
 " *** GitGutter
 
 " Update GitGutter Symbole beim Speichern von Dateien
-autocmd BufWritePost * GitGutter
+augroup GitGutterCommands
+	autocmd!
+	autocmd BufWritePost * GitGutter
+augroup END
 let g:gitgutter_map_keys = 0
 
 " *** CtrlP
@@ -262,7 +276,19 @@ let g:lightline={
 	\   'gitbranch': LightlineDisplayGitBranch(),
 	\   'gitstatus': "%{GitStatus()}"
 	\ },
+	\ 'component_function': {
+	\   'filetype': 'MyFiletype',
+	\   'fileformat': 'MyFileformat'
+	\ }
 \ }
+
+function! MyFiletype()
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
 " *** Bufferline
 
