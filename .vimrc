@@ -7,7 +7,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/dotfiles
 call vundle#begin()
-Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -18,14 +18,12 @@ Plugin 'airblade/vim-gitgutter.git'
 Plugin 'itchyny/lightline.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mengelbrecht/lightline-bufferline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-fugitive'
+Plugin 'preservim/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
+"Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'mattn/calendar-vim'
-Plugin 'dbeniamine/cheat.sh-vim'
 Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 
@@ -218,12 +216,12 @@ let g:gitgutter_map_keys = 0
 
 " *** CtrlP
 
-" Keine Begrenzung der Dateien in CtrlP
-let g:ctrlp_max_files = 0
+let g:ctrlp_max_files = 50000
+let g:ctrlp_show_hidden = 1
 " Bestimmte Dateien ignorieren
 let g:ctrlp_custom_ignore = {
 	\ 'dir': '\v[\/]\.git$',
-	\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|gif|ico)$'
+	\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|gif|ico|svg)$'
 \ }
 
 " *** VIM-JSON
@@ -234,7 +232,7 @@ let g:vim_json_syntax_conceal = 0
 " *** Lightline
 
 function! LightlineDisplayGitBranch()
-	return "\U2387 %{FugitiveHead()}"
+	return "\ue725 %{FugitiveHead()}"
 endfunction
 
 function! GitStatus()
@@ -293,6 +291,10 @@ endfunction
 " *** Bufferline
 
 let g:lightline#bufferline#smart_path=0
+
+" *** vim-devicons
+
+let g:webdevicons_conceal_nerdtree_brackets = 1
 
 " *********************
 " * Eigene Funktionen *

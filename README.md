@@ -20,7 +20,7 @@ Was hier noch gebraucht wird um "alles" zu haben:
 * *Universal Ctags* oder seinen Vorgänger *Exuberant Ctags*
 * [most](https://github.com/jedsoft/most).
 * [lsd](https://github.com/Peltoche/lsd)
-* Einen [Nerd font](https://www.nerdfonts.com/). Ich hab derzeit *CascadiaCode* und *0xProto* installiert.
+* Einen [Nerd font](https://www.nerdfonts.com/). Ich hab derzeit *CascadiaCode*, *Hack Nerd Mono* und *0xProto* installiert.
 
 Unter macOS muß zusätzlich noch über *Homebrew* installiert werden:
 
@@ -53,6 +53,10 @@ Die *Ctags* sind sehr einfach per `apt` (Linux) oder `brew` (macOS) installierba
 $ cd ~/dotfiles
 $ git submodule update --remote --recursive
 ```
+
+### Nerd Fonts
+
+Eine oder mehrere Schriften herunterladen und z.B. in *iTerm* als Font angeben.
 
 ### Erläuterungen für Plugins
 
