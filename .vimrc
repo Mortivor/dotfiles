@@ -247,7 +247,7 @@ let g:lightline={
 	\             [ 'gitbranch', 'gitstatus' ],
 	\             [ 'readonly', 'relativepath', 'modified' ] ],
 	\   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
-	\              [ 'percent', 'lineinfo' ],
+	\              [ 'percent', 'lineinfo', 'tag' ],
 	\              [ 'charhexvalue', 'fileformat', 'fileencoding', 'filetype' ] ]
 	\ },
 	\ 'tabline': {
@@ -276,7 +276,8 @@ let g:lightline={
 	\ },
 	\ 'component_function': {
 	\   'filetype': 'MyFiletype',
-	\   'fileformat': 'MyFileformat'
+	\   'fileformat': 'MyFileformat',
+	\   'tag': 'LightlineCurrentTag'
 	\ }
 \ }
 
@@ -286,6 +287,14 @@ endfunction
 
 function! MyFileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+function! LightlineCurrentTag()
+	if exists(':TagbarCurrentTag')
+		" execute() liefert Zeilenende → trimmen
+		return substitute(execute('TagbarCurrentTag'), '\n', '', 'g')
+	endif
+	return ''
 endfunction
 
 " *** Bufferline
