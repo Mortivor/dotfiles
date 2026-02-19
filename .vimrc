@@ -27,6 +27,13 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 
+let s:ignore_bins   = 'exe|so|dll|class'
+let s:ignore_imgs   = 'png|jpg|jpeg|gif|ico|svg'
+let s:ignore_media  = 'mp4|mp3|ogg|wav|mov|avi|mkv'
+let s:ignore_arch   = 'zip|tar|gz|rar|7z'
+let s:ignore_docs   = 'pdf'
+let s:ignore_fonts  = 'ttf|woff|woff2|eot'
+
 " *************************
 " * Farben & Highlighting *
 " *************************
@@ -52,12 +59,20 @@ syntax on
 " * Autocomplete *
 " ****************
 
+function! s:AddWildIgnore(group)
+	let l:patterns = map(split(a:group, '|'), {_, ext -> '*.' . ext})
+	execute 'set wildignore+=' . join(l:patterns, ',')
+endfunction
+
 set wildmenu
 set wildmode=list:longest,full
-set wildignore+=*.git
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.ico,*.class
-set wildignore+=*.DS_Store
-set wildignore+=*.tmp,*~
+call s:AddWildIgnore(s:ignore_bins)
+call s:AddWildIgnore(s:ignore_imgs)
+call s:AddWildIgnore(s:ignore_media)
+call s:AddWildIgnore(s:ignore_arch)
+call s:AddWildIgnore(s:ignore_docs)
+call s:AddWildIgnore(s:ignore_fonts)
+set wildignore+=*.git,*.DS_Store,*.tmp,*~
 
 " *********
 " * Suche *
@@ -216,12 +231,19 @@ let g:gitgutter_map_keys = 0
 
 " *** CtrlP
 
-let g:ctrlp_max_files = 50000
+let g:ctrlp_max_files = 80000
 let g:ctrlp_show_hidden = 1
 " Bestimmte Dateien ignorieren
 let g:ctrlp_custom_ignore = {
-	\ 'dir': '\v[\/]\.git$',
-	\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|gif|ico|svg)$'
+	\ 'dir': '\v([\/]\.(git|angular|idea)$|[\/](node_modules|dist|build|coverage))',
+	\ 'file': '\v\.('
+	\   . s:ignore_bins  . '|'
+	\   . s:ignore_imgs  . '|'
+	\   . s:ignore_media . '|'
+	\   . s:ignore_arch  . '|'
+	\   . s:ignore_docs  . '|'
+	\   . s:ignore_fonts
+	\ . ')$'
 \ }
 
 " *** VIM-JSON
@@ -254,20 +276,10 @@ let g:lightline={
 	\   'left': [ ['buffers'] ],
 	\ },
 	\ 'component_expand': {
-	\   'buffers': 'lightline#bufferline#buffers',
-	\   'linter_checking': 'lightline#ale#checking',
-	\   'linter_infos': 'lightline#ale#infos',
-	\   'linter_warnings': 'lightline#ale#warnings',
-	\   'linter_errors': 'lightline#ale#errors',
-	\   'linter_ok': 'lightline#ale#ok'
+	\   'buffers': 'lightline#bufferline#buffers'
 	\ },
 	\ 'component_type': {
-	\   'buffers': 'tabsel',
-	\   'linter_errors': 'error',
-	\   'linter_ok': 'right',
-	\   'linter_checking': 'right',
-	\   'linter_infos': 'right',
-	\   'linter_warnings': 'warning'
+	\   'buffers': 'tabsel'
 	\ },
 	\ 'component': {
 	\   'charhexvalue': '0x%B',

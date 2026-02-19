@@ -18,6 +18,8 @@
 	ls = log --no-merges --decorate=short --pretty=format:'%C(red)%h %C(green)%cs (%cr) %C(bold blue)%aN%C(auto)%d%C(reset) %s'
 	ll = log --no-merges --decorate=short --pretty=format:'%C(red)%h %C(green)%ci (%cr) %C(bold blue)%aN%C(auto)%d%C(reset) %s' --numstat
 	lg = log --graph --pretty=format:'%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)%cr %C(bold blue)%aN%C(reset) [Parents: %C(bold yellow)%p%Creset]' --abbrev-commit --date=relative
+	myls = !git ls --author='^Christian Lange'
+	myll = !git ll --author='^Christian Lange'
 [color]
 	ui = auto
 [color "diff-highlight"]
