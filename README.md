@@ -2,7 +2,7 @@
 
 Dies ist meine persönliche Sammlung von Konfigurationsdateien.
 
-Archiviert: Dieses Repo wurde archiviert bzw. nach Codeberg verschoben!
+***Archiviert:* Dieses Repo wurde archiviert bzw. nach Codeberg verschoben!**
 
 ## Kompatible Systeme
 
